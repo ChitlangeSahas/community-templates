@@ -267,6 +267,256 @@ spec:
     name: Github - InfluxData [InfluxDB & Telegraf repos]
 ---
 apiVersion: influxdata.com/v2alpha1
+kind: Dashboard
+metadata:
+  name: hungry-tesla-604001
+spec:
+  associations:
+    - kind: Label
+      name: hopeful-banach-e04001
+  charts:
+    - axes:
+        - base: "10"
+          name: x
+          scale: linear
+        - base: "10"
+          name: y
+          scale: linear
+      colors:
+        - hex: '#00C9FF'
+          name: laser
+          type: text
+      decimalPlaces: 2
+      height: 3
+      kind: Single_Stat_Plus_Line
+      name: InfluxDB - Forks
+      position: overlaid
+      queries:
+        - query: |-
+            from(bucket: "github")
+              |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+              |> filter(fn: (r) => r["name"] == "influxdb")
+              |> filter(fn: (r) => r["_field"] == "forks")
+              |> aggregateWindow(every: v.windowPeriod, fn: max)
+              |> yield(name: "max")
+      width: 3
+      xCol: _time
+      yCol: _value
+    - axes:
+        - base: "10"
+          name: x
+          scale: linear
+        - base: "10"
+          name: y
+          scale: linear
+      colors:
+        - hex: '#00C9FF'
+          name: laser
+          type: text
+      decimalPlaces: 2
+      height: 3
+      kind: Single_Stat_Plus_Line
+      name: Telegraf - Forks
+      position: overlaid
+      queries:
+        - query: |-
+            from(bucket: "github")
+              |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+              |> filter(fn: (r) => r["name"] == "telegraf")
+              |> filter(fn: (r) => r["_field"] == "forks")
+              |> aggregateWindow(every: v.windowPeriod, fn: max)
+              |> yield(name: "max")
+      width: 3
+      xCol: _time
+      yCol: _value
+      yPos: 3
+    - axes:
+        - base: "10"
+          name: x
+          scale: linear
+        - base: "10"
+          name: y
+          scale: linear
+      colors:
+        - hex: '#4ED8A0'
+          name: rainforest
+          type: text
+        - hex: '#F95F53'
+          name: curacao
+          type: text
+          value: 1000
+      decimalPlaces: 2
+      height: 3
+      kind: Single_Stat_Plus_Line
+      name: InfluxDB - Issues & Pull Requests
+      position: overlaid
+      queries:
+        - query: |-
+            from(bucket: "github")
+              |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+              |> filter(fn: (r) => r["name"] == "influxdb")
+              |> filter(fn: (r) => r["_field"] == "open_issues")
+      width: 3
+      xCol: _time
+      xPos: 3
+      yCol: _value
+    - axes:
+        - base: "10"
+          name: x
+          scale: linear
+        - base: "10"
+          name: y
+          scale: linear
+      colors:
+        - hex: '#32B08C'
+          name: viridian
+          type: text
+        - hex: '#F95F53'
+          name: curacao
+          type: text
+          value: 1000
+        - hex: '#FDC44F'
+          name: Cthulhu
+          type: scale
+        - hex: '#007C76'
+          name: Cthulhu
+          type: scale
+        - hex: '#8983FF'
+          name: Cthulhu
+          type: scale
+      decimalPlaces: 2
+      height: 3
+      kind: Single_Stat_Plus_Line
+      name: Telegraf - Issues & Pull Requests
+      position: overlaid
+      queries:
+        - query: |-
+            from(bucket: "github")
+              |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+              |> filter(fn: (r) => r["name"] == "telegraf")
+              |> filter(fn: (r) => r["_field"] == "open_issues")
+      width: 3
+      xCol: _time
+      xPos: 3
+      yCol: _value
+      yPos: 3
+    - axes:
+        - base: "10"
+          name: y
+          scale: linear
+        - base: "10"
+          name: x
+          scale: linear
+      colors:
+        - hex: '#00C9FF'
+          name: laser
+          type: text
+        - hex: '#7CE490'
+          name: honeydew
+          type: text
+          value: 18000
+      decimalPlaces: 2
+      height: 3
+      kind: Single_Stat_Plus_Line
+      name: InfluxDB - Stars
+      position: overlaid
+      queries:
+        - query: |-
+            from(bucket: "github")
+              |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+              |> filter(fn: (r) => r["name"] == "influxdb")
+              |> filter(fn: (r) => r["_field"] == "stars")
+      width: 3
+      xCol: _time
+      xPos: 6
+      yCol: _value
+    - axes:
+        - base: "10"
+          name: y
+          scale: linear
+        - base: "10"
+          name: x
+          scale: linear
+      colors:
+        - hex: '#00C9FF'
+          name: laser
+          type: text
+        - hex: '#7CE490'
+          name: honeydew
+          type: text
+          value: 8000
+      decimalPlaces: 2
+      height: 3
+      kind: Single_Stat_Plus_Line
+      name: Telegraf - Stars
+      position: overlaid
+      queries:
+        - query: |-
+            from(bucket: "github")
+              |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+              |> filter(fn: (r) => r["name"] == "telegraf")
+              |> filter(fn: (r) => r["_field"] == "stars")
+      width: 3
+      xCol: _time
+      xPos: 6
+      yCol: _value
+      yPos: 3
+    - axes:
+        - base: "10"
+          name: x
+          scale: linear
+        - base: "10"
+          name: y
+          scale: linear
+      colors:
+        - hex: '#00C9FF'
+          name: laser
+          type: text
+      decimalPlaces: 2
+      height: 3
+      kind: Single_Stat_Plus_Line
+      name: InfluxDB - Watchers
+      position: overlaid
+      queries:
+        - query: |-
+            from(bucket: "github")
+              |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+              |> filter(fn: (r) => r["name"] == "influxdb")
+              |> filter(fn: (r) => r["_field"] == "subscribers")
+      width: 3
+      xCol: _time
+      xPos: 9
+      yCol: _value
+    - axes:
+        - base: "10"
+          name: x
+          scale: linear
+        - base: "10"
+          name: y
+          scale: linear
+      colors:
+        - hex: '#00C9FF'
+          name: laser
+          type: text
+      decimalPlaces: 2
+      height: 3
+      kind: Single_Stat_Plus_Line
+      name: InfluxDB - Watchers
+      position: overlaid
+      queries:
+        - query: |-
+            from(bucket: "github")
+              |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+              |> filter(fn: (r) => r["name"] == "telegraf")
+              |> filter(fn: (r) => r["_field"] == "subscribers")
+      width: 3
+      xCol: _time
+      xPos: 9
+      yCol: _value
+      yPos: 3
+  name: Github - InfluxData [InfluxDB & Telegraf repos]
+---
+apiVersion: influxdata.com/v2alpha1
 kind: Telegraf
 metadata:
     name: competent-goldberg-e04001
